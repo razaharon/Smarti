@@ -1,0 +1,32 @@
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="d-flex justify-content-center">
+      <div *ngIf="!songs" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <i *ngIf="songs?.length==0">No songs to display</i>
+    </div>
+    <table *ngIf="songs?.length>0" class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (mouseenter)="showMore($event)" (mouseleave)="hideMore($event)" *ngFor="let song of songs; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{song.title}}</td>
+          <td>{{song.author}}</td>
+          <td>
+            {{song.genre}}
+            <img (click)="viewSong(song)" class="float-right clickable hidden" width="21px"
+              src="../../../assets/images/icon_more.png" alt="more">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

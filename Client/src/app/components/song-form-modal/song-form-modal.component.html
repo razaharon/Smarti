@@ -1,0 +1,21 @@
+<form [formGroup]="songForm" (ngSubmit)="onSubmit(songForm)">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ song.id ? 'Update' : 'Add' }} Song</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label for="title">Title</label>
+    <input ngbAutoFocus formControlName="title" type="text" name="title" class="form-control">
+    <label class="mt-2" for="author">Author</label>
+    <input formControlName="author" type="text" name="author" class="form-control">
+    <label class="mt-2" for="genre">Genre</label>
+    <input formControlName="genre" type="text" name="genre" class="form-control">
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="song.id" (click)="onDelete()" type="button" class="btn btn-outline-danger mr-auto">Delete</button>
+    <button [disabled]="songForm.invalid" type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</form >
