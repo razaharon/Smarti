@@ -8,21 +8,18 @@ use App\Song;
 class SongsController extends Controller
 {
     public function index() {
-        return Song::all();
+        return Song::getAll();
     }
     public function show($id) {
-        return Song::find($id);
+        return Song::getById($id);
     }
     public function store(Request $request) {
-        return Song::create($request->all());
+        return Song::add($request->all());
     }
     public function update(Request $request, $id) {
-        $song = Song::findOrFail($id);
-        $song->update($request->all());
-        return $song;
+       return Song::updateById($request->all(), $id);
     }
     public function delete($id){
-        $song = Song::findOrFail($id);
-        return $song->delete();
+        return Song::deleteById($id);
     }
 }
