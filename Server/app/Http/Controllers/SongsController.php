@@ -10,8 +10,8 @@ class SongsController extends Controller
     public function index() {
         return Song::getAll();
     }
-    public function show($id) {
-        return Song::getById($id);
+    public function show(Song $song): Song {
+        return $song;
     }
     public function store(Request $request) {
         return Song::add($request->all());

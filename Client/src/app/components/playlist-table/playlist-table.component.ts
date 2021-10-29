@@ -14,11 +14,11 @@ export class PlaylistTableComponent implements OnInit {
   public songs: Song[];
 
   constructor(
-    private _song: SongsService,
-    private _modal: NgbModal) { }
+    private songService: SongsService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this._song.songs.subscribe(songs => this.songs = songs);
+    this.songService.songs.subscribe(songs => this.songs = songs);
   }
 
   public showMore(event): void {
@@ -30,7 +30,7 @@ export class PlaylistTableComponent implements OnInit {
   }
 
   public viewSong(song: Song): void {
-    const modalRef = this._modal.open(SongFormModalComponent);
+    const modalRef = this.modalService.open(SongFormModalComponent);
     modalRef.componentInstance.song = song;
   }
 

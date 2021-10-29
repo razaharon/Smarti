@@ -9,9 +9,9 @@ import { SongFormModalComponent } from 'src/app/components/song-form-modal/song-
 })
 export class PlaylistPageComponent {
 
-  constructor(private _modal: NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
   public addSong(): void {
-    this._modal.open(SongFormModalComponent);
+    this.modalService.open(SongFormModalComponent);
   }
 }

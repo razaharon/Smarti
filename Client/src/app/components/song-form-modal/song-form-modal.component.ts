@@ -18,19 +18,19 @@ export class SongFormModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private _song: SongsService,
-    private _formBuilder: FormBuilder
+    private songService: SongsService,
+    private formBuilder: FormBuilder
   ) { }
 
   public ngOnInit(): void {
     if (!this.song) {
-      this.song = this._song.generateEmptySong();
+      this.song = this.songService.generateEmptySong();
     }
     this.buildForm();
   }
 
   private buildForm(): void {
-    this.songForm = this._formBuilder.group({
+    this.songForm = this.formBuilder.group({
       id: [this.song.id || null],
       title: [this.song.title || '', Validators.required],
       author: [this.song.author || '', Validators.required],
@@ -41,15 +41,15 @@ export class SongFormModalComponent implements OnInit {
   public onSubmit(form): void {
     if (form.valid) {
       if (this.song.id) {
-        this._song.updateSong(form.value).then(song => this.activeModal.close('submit'));
+        this.songService.updateSong(form.value).then(song => this.activeModal.close('submit'));
       } else {
-        this._song.addSong(form.value).then(song => this.activeModal.close('submit'));
+        this.songService.addSong(form.value).then(song => this.activeModal.close('submit'));
       }
     }
   }
 
   public onDelete(): void {
-    this._song.deleteSong(this.song.id).then(() => this.activeModal.close('delete'));
+    this.songService.deleteSong(this.song.id).then(() => this.activeModal.close('delete'));
   }
 
 }
